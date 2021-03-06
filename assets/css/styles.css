@@ -1,0 +1,45 @@
+#mainNav a {
+  color: #9f1897;
+}
+
+@media (min-width:992px) {
+  #mainNav .nav-link.active:hover {
+    color: #25cbd3;
+  }
+}
+
+#logo_concurso {
+  max-width: 309px;
+}
+
+#mainNav.navbar-shrink {
+  background: white;
+}
+
+body {
+  font-family: Cabin,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+@media (min-width: 300px) {
+  #mainNav {
+    background-color: #ffffff;
+  }
+}
+
+#mainNav {
+  background-color: transparent;
+}
+
+#mainNav .navbar-toggler {
+  color: #9f1897;
+  border: 1px solid #9f1897;
+}
+
+#acerca-de {
+  background-color: rgb(13,200,209);
+}
+
+#premios {
+  background-color: rgb(148,59,139);
+}
+
