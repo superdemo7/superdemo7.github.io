@@ -17,12 +17,26 @@
     <meta property="og:title" content="Arturo Mandujano — desarrollador web" />
     <meta
       property="og:description"
-      content="Desarrollador web de producto en PromoSelect y autor de InBike Studio."
+      content="Arturo Mandujano, desarrollador web de producto en PromoSelect y autor de InBike Studio. Guadalajara."
     />
+    <meta property="og:site_name" content="Arturo Mandujano" />
     <meta property="og:url" content="https://superdemo7.github.io/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:image" content="https://superdemo7.github.io/arturo.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="2118" />
+    <meta property="og:image:alt" content="Retrato de Arturo Mandujano" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arturo Mandujano — desarrollador web" />
+    <meta
+      name="twitter:description"
+      content="Arturo Mandujano, desarrollador web de producto en PromoSelect y autor de InBike Studio. Guadalajara."
+    />
+    <meta name="twitter:image" content="https://superdemo7.github.io/arturo.jpg" />
+    <meta name="twitter:image:alt" content="Retrato de Arturo Mandujano" />
     <link rel="stylesheet" href="styles.css" />
     <script>
       (function () {
@@ -151,8 +165,10 @@
           <img
             id="portrait"
             src="arturo.jpg"
-            width="682"
-            height="1024"
+            srcset="arturo-800.jpg 800w, arturo-1200.jpg 1200w, arturo.jpg 1600w, arturo-2400.jpg 2400w"
+            sizes="(max-width: 800px) calc(100vw - 2.5rem), (max-width: 72rem) 40vw, 29rem"
+            width="1600"
+            height="2118"
             alt="Retrato de Arturo Mandujano"
             fetchpriority="high"
           />

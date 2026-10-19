@@ -45,8 +45,16 @@
     if (ogTitle) ogTitle.setAttribute("content", titles[lang]);
     var ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) ogDescription.setAttribute("content", descriptions[lang]);
+    var twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute("content", titles[lang]);
+    var twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescription) twitterDescription.setAttribute("content", descriptions[lang]);
     var ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "es_MX");
+    var ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
+    if (ogImageAlt) ogImageAlt.setAttribute("content", alts[lang]);
+    var twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
+    if (twitterImageAlt) twitterImageAlt.setAttribute("content", alts[lang]);
     var portrait = document.getElementById("portrait");
     if (portrait) portrait.alt = alts[lang];
     document.querySelectorAll("[data-shot]").forEach(function (img) {
