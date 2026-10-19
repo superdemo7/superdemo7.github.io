@@ -10,7 +10,15 @@ _Avoid_: currículum, galería de repositorios, sitio del concurso
 
 **Caso**:
 Un trabajo contado con el problema, la parte que le tocó, la decisión y el resultado.
-_Avoid_: proyecto, tarjeta, repositorio
+_Avoid_: tarjeta, repositorio
+
+**Proyecto**:
+Un sitio en el que Arturo trabajó, dicho con qué es y con qué está hecho.
+_Avoid_: caso, repositorio
+
+**Suitup**:
+El sitio público de kits de regalo y onboarding para empresas.
+_Avoid_: la tienda de PromoSelect
 
 **Tienda**:
 El sitio público de PromoSelect.
