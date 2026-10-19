@@ -23,3 +23,11 @@ _Avoid_: ERP, CRM
 **Coordinación**:
 Arturo sigue al frente de un equipo de 6 desarrolladores en PromoSelect. No es el puesto que la página ofrece.
 _Avoid_: gerencia, dirección
+
+**InBike**:
+El sitio público del estudio de ciclismo indoor que Arturo escribió.
+_Avoid_: la app del estudio, un producto de PromoSelect
+
+**Habilidad**:
+Una herramienta que Arturo puede sostener en una entrevista.
+_Avoid_: porcentaje, barra de dominio

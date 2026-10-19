@@ -4,9 +4,18 @@
     en: "Arturo Mandujano — web developer",
   };
   var descriptions = {
-    es: "Desarrollador web de producto en PromoSelect, Guadalajara. Tienda pública y plataforma comercial.",
-    en: "Web developer doing product work at PromoSelect, Guadalajara. Public store and commercial platform.",
+    es: "Arturo Mandujano, desarrollador web de producto en PromoSelect y autor de InBike Studio. Guadalajara.",
+    en: "Arturo Mandujano, web developer doing product work at PromoSelect and author of the InBike Studio site. Guadalajara.",
   };
+  var alts = {
+    es: "Retrato de Arturo Mandujano",
+    en: "Portrait of Arturo Mandujano",
+  };
+  var regions = {
+    es: "Trabajo",
+    en: "Work",
+  };
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function apply(lang) {
     document.documentElement.lang = lang;
@@ -20,6 +29,10 @@
     if (ogDescription) ogDescription.setAttribute("content", descriptions[lang]);
     var ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "es_MX");
+    var portrait = document.getElementById("portrait");
+    if (portrait) portrait.alt = alts[lang];
+    var track = document.querySelector(".film-track");
+    if (track) track.setAttribute("aria-label", regions[lang]);
     document.querySelectorAll("[data-set-lang]").forEach(function (button) {
       var active = button.getAttribute("data-set-lang") === lang;
       button.setAttribute("aria-pressed", active ? "true" : "false");
@@ -39,10 +52,184 @@
   }
 
   document.querySelectorAll("[data-set-lang]").forEach(function (button) {
+    button.addEventListener("pointerdown", function () {
+      button.dataset.pressed = "1";
+    });
     button.addEventListener("click", function () {
       apply(button.getAttribute("data-set-lang"));
     });
   });
 
   apply(document.documentElement.dataset.lang === "en" ? "en" : "es");
+
+  function rubberband(overshoot, dimension) {
+    var constant = 0.55;
+    return (overshoot * dimension * constant) / (dimension + constant * Math.abs(overshoot));
+  }
+
+  function project(velocity) {
+    var deceleration = 0.998;
+    return (velocity / 1000) * deceleration / (1 - deceleration);
+  }
+
+  function springTo(from, to, velocity, onUpdate) {
+    var zeta = 1;
+    var omega = (2 * Math.PI) / 0.45;
+    var x = from;
+    var v = velocity || 0;
+    var last = performance.now();
+    var raf = 0;
+    function frame(now) {
+      var dt = Math.min(0.032, (now - last) / 1000);
+      last = now;
+      var force = omega * omega * (to - x) - 2 * zeta * omega * v;
+      v += force * dt;
+      x += v * dt;
+      onUpdate(x);
+      if (Math.abs(to - x) < 0.4 && Math.abs(v) < 12) {
+        onUpdate(to);
+        return;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    return function () {
+      cancelAnimationFrame(raf);
+    };
+  }
+
+  var track = document.querySelector(".film-track");
+  if (track && !reduceMotion.matches) {
+    var drag = null;
+    var stopSpring = null;
+    var suppressClick = false;
+
+    track.addEventListener("pointerdown", function (event) {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      if (stopSpring) stopSpring();
+      track.setPointerCapture(event.pointerId);
+      drag = {
+        x: event.clientX,
+        scroll: track.scrollLeft,
+        last: performance.now(),
+        v: 0,
+        moved: false,
+      };
+      track.classList.add("is-dragging");
+    });
+
+    track.addEventListener("pointermove", function (event) {
+      if (!drag) return;
+      var dx = event.clientX - drag.x;
+      if (Math.abs(dx) > 8) drag.moved = true;
+      var max = track.scrollWidth - track.clientWidth;
+      var next = drag.scroll - dx;
+      if (next < 0) next = rubberband(next, track.clientWidth);
+      else if (next > max) next = max + rubberband(next - max, track.clientWidth);
+      var now = performance.now();
+      var dt = (now - drag.last) / 1000;
+      if (dt > 0) drag.v = (next - track.scrollLeft) / dt;
+      drag.last = now;
+      track.scrollLeft = next;
+    });
+
+    function endDrag() {
+      if (!drag) return;
+      var velocity = drag.v;
+      suppressClick = drag.moved;
+      drag = null;
+      track.classList.remove("is-dragging");
+      var max = Math.max(0, track.scrollWidth - track.clientWidth);
+      var projected = track.scrollLeft + project(velocity);
+      var cards = Array.prototype.slice.call(track.children);
+      var target = cards.reduce(function (best, card) {
+        var left =
+          card.getBoundingClientRect().left -
+          track.getBoundingClientRect().left +
+          track.scrollLeft;
+        return Math.abs(left - projected) < Math.abs(best - projected) ? left : best;
+      }, 0);
+      target = Math.max(0, Math.min(max, target));
+      stopSpring = springTo(track.scrollLeft, target, velocity, function (value) {
+        track.scrollLeft = value;
+      });
+    }
+
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+    track.addEventListener(
+      "click",
+      function (event) {
+        if (!suppressClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      },
+      true
+    );
+
+    track.addEventListener("keydown", function (event) {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      var cards = Array.prototype.slice.call(track.children);
+      var current = cards.reduce(function (best, card) {
+        var left =
+          card.getBoundingClientRect().left -
+          track.getBoundingClientRect().left +
+          track.scrollLeft;
+        return Math.abs(left - track.scrollLeft) < Math.abs(best - track.scrollLeft) ? left : best;
+      }, 0);
+      var index = cards.findIndex(function (card) {
+        var left =
+          card.getBoundingClientRect().left -
+          track.getBoundingClientRect().left +
+          track.scrollLeft;
+        return Math.abs(left - current) < 2;
+      });
+      var next = event.key === "ArrowRight" ? index + 1 : index - 1;
+      if (next < 0 || next >= cards.length) return;
+      event.preventDefault();
+      var card = cards[next];
+      var left =
+        card.getBoundingClientRect().left -
+        track.getBoundingClientRect().left +
+        track.scrollLeft;
+      if (stopSpring) stopSpring();
+      stopSpring = springTo(track.scrollLeft, left, 0, function (value) {
+        track.scrollLeft = value;
+      });
+    });
+  }
+
+  if (!reduceMotion.matches && "IntersectionObserver" in window) {
+    document.querySelectorAll(".chapter, .specs").forEach(function (el) {
+      el.classList.add("reveal");
+    });
+    var seen = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          seen.unobserve(el);
+          var start = performance.now();
+          function tick(now) {
+            var t = Math.min(1, (now - start) / 420);
+            var eased = 1 - Math.pow(1 - t, 3);
+            el.style.opacity = String(eased);
+            el.style.transform = "translateY(" + (12 * (1 - eased)) + "px)";
+            if (t < 1) requestAnimationFrame(tick);
+            else {
+              el.style.opacity = "";
+              el.style.transform = "";
+              el.classList.remove("reveal");
+            }
+          }
+          requestAnimationFrame(tick);
+        });
+      },
+      { threshold: 0.2 }
+    );
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      seen.observe(el);
+    });
+  }
 })();
