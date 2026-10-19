@@ -463,18 +463,104 @@ h3 {
   margin-top: 1.5rem;
 }
 
-.projects article {
+.project-card {
   border-top: 1px solid var(--line);
-  padding: 1.25rem 0;
+  padding: 1.6rem 0;
 }
 
-.projects h3 {
+.project-layout {
+  display: grid;
+  gap: 1.35rem;
+  align-items: center;
+}
+
+.project-copy h3 {
   margin-bottom: 0.35rem;
 }
 
-.projects p {
+.project-copy p {
   max-width: 40rem;
   margin: 0.3rem 0 0;
+}
+
+.project-shot {
+  margin: 0;
+  border-radius: 1.15rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--stage);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.project-shot a {
+  display: block;
+  color: inherit;
+}
+
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+@media (min-width: 801px) {
+  .project-layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 2rem;
+  }
+
+  .project-card:nth-child(even) .project-layout {
+    direction: rtl;
+  }
+
+  .project-card:nth-child(even) .project-layout > * {
+    direction: ltr;
+  }
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logo-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.85rem 0.8rem 0.75rem;
+  background: #fff;
+  color: #1d1d1f;
+  border: 1px solid #d2d2d7;
+  border-radius: 1.1rem;
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.logo-chip img {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.logo-chip span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo-chip:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.logo-chip:active {
+  transform: scale(0.97);
 }
 
 .specs {
@@ -537,6 +623,11 @@ h3 {
     max-width: none;
   }
 
+  .specs div {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
   .lang {
     margin-left: 0;
   }
@@ -571,7 +662,9 @@ h3 {
 
   .button:active,
   .card-link:active,
-  button:active {
+  button:active,
+  .logo-chip:hover,
+  .logo-chip:active {
     transform: none;
     transition: none;
   }

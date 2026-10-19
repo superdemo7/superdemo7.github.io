@@ -11,6 +11,24 @@
     es: "Retrato de Arturo Mandujano",
     en: "Portrait of Arturo Mandujano",
   };
+  var shotAlts = {
+    suitup: {
+      es: "Captura del sitio de Suitup",
+      en: "Screenshot of the Suitup site",
+    },
+    promoselect: {
+      es: "Captura de la tienda PromoSelect",
+      en: "Screenshot of the PromoSelect store",
+    },
+    inbike: {
+      es: "Captura del sitio de InBike Studio",
+      en: "Screenshot of the InBike Studio site",
+    },
+    admin: {
+      es: "Captura de la pantalla de inicio de sesión del admin de PromoSelect",
+      en: "Screenshot of the PromoSelect admin sign-in screen",
+    },
+  };
   var regions = {
     es: "Trabajo",
     en: "Work",
@@ -31,6 +49,10 @@
     if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "es_MX");
     var portrait = document.getElementById("portrait");
     if (portrait) portrait.alt = alts[lang];
+    document.querySelectorAll("[data-shot]").forEach(function (img) {
+      var key = img.getAttribute("data-shot");
+      if (shotAlts[key]) img.alt = shotAlts[key][lang];
+    });
     var track = document.querySelector(".film-track");
     if (track) track.setAttribute("aria-label", regions[lang]);
     document.querySelectorAll("[data-set-lang]").forEach(function (button) {
@@ -200,6 +222,31 @@
     });
   }
 
+  function revealElement(el, options) {
+    var delay = options.delay || 0;
+    var distanceY = options.distanceY == null ? 12 : options.distanceY;
+    var distanceX = options.distanceX || 0;
+    var duration = options.duration || 420;
+    var startAt = performance.now() + delay;
+    function tick(now) {
+      if (now < startAt) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      var t = Math.min(1, (now - startAt) / duration);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.style.opacity = String(eased);
+      el.style.transform =
+        "translate(" + distanceX * (1 - eased) + "px," + distanceY * (1 - eased) + "px)";
+      if (t < 1) requestAnimationFrame(tick);
+      else {
+        el.style.opacity = "";
+        el.style.transform = "";
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
   if (!reduceMotion.matches && "IntersectionObserver" in window) {
     document.querySelectorAll(".chapter, .specs").forEach(function (el) {
       el.classList.add("reveal");
@@ -210,20 +257,7 @@
           if (!entry.isIntersecting) return;
           var el = entry.target;
           seen.unobserve(el);
-          var start = performance.now();
-          function tick(now) {
-            var t = Math.min(1, (now - start) / 420);
-            var eased = 1 - Math.pow(1 - t, 3);
-            el.style.opacity = String(eased);
-            el.style.transform = "translateY(" + (12 * (1 - eased)) + "px)";
-            if (t < 1) requestAnimationFrame(tick);
-            else {
-              el.style.opacity = "";
-              el.style.transform = "";
-              el.classList.remove("reveal");
-            }
-          }
-          requestAnimationFrame(tick);
+          revealElement(el, { distanceY: 12 });
         });
       },
       { threshold: 0.2 }
@@ -231,5 +265,64 @@
     document.querySelectorAll(".reveal").forEach(function (el) {
       seen.observe(el);
     });
+
+    document.querySelectorAll(".project-card").forEach(function (card, index) {
+      var copy = card.querySelector(".project-copy");
+      var shot = card.querySelector(".project-shot");
+      var slideX = index % 2 === 0 ? 28 : -28;
+      var cardSeen = new IntersectionObserver(
+        function (entries) {
+          if (!entries[0].isIntersecting) return;
+          cardSeen.disconnect();
+          if (copy) revealElement(copy, { distanceY: 14, duration: 460 });
+          if (shot) {
+            revealElement(shot, {
+              delay: 90,
+              distanceY: 18,
+              distanceX: slideX,
+              duration: 520,
+            });
+          }
+        },
+        { threshold: 0.18 }
+      );
+      cardSeen.observe(card);
+    });
+
+    var grid = document.querySelector(".logo-grid");
+    if (grid) {
+      var chips = Array.prototype.slice.call(grid.querySelectorAll(".logo-chip"));
+      chips.forEach(function (chip) {
+        chip.classList.add("reveal");
+      });
+      var gridSeen = new IntersectionObserver(
+        function (entries) {
+          if (!entries[0].isIntersecting) return;
+          gridSeen.disconnect();
+          chips.forEach(function (el, index) {
+            var start = performance.now() + index * 42;
+            function tick(now) {
+              if (now < start) {
+                requestAnimationFrame(tick);
+                return;
+              }
+              var t = Math.min(1, (now - start) / 380);
+              var eased = 1 - Math.pow(1 - t, 3);
+              el.style.opacity = String(eased);
+              el.style.transform = "translateY(" + (10 * (1 - eased)) + "px)";
+              if (t < 1) requestAnimationFrame(tick);
+              else {
+                el.style.opacity = "";
+                el.style.transform = "";
+                el.classList.remove("reveal");
+              }
+            }
+            requestAnimationFrame(tick);
+          });
+        },
+        { threshold: 0.2 }
+      );
+      gridSeen.observe(grid);
+    }
   }
 })();

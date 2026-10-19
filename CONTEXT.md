@@ -39,3 +39,19 @@ _Avoid_: la app del estudio, un producto de PromoSelect
 **Habilidad**:
 Una herramienta que Arturo puede sostener en una entrevista.
 _Avoid_: porcentaje, barra de dominio
+
+**Idioma**:
+Español nativo e inglés avanzado.
+_Avoid_: porcentaje, nivel intermedio
+
+**DevOps**:
+Docker, GitLab CI, y la observabilidad de producción con Grafana y Loki.
+_Avoid_: el inventario de sitios del servidor
+
+**Experiencia de desarrollo**:
+Psalm, PHPUnit, Composer y Renovate en el flujo del backend.
+_Avoid_: porcentaje
+
+**Ágil**:
+Arturo trabaja con metodología ágil.
+_Avoid_: Scrum, Kanban, un rol de facilitador que no haya dicho
