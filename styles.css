@@ -1,0 +1,374 @@
+:root {
+  color-scheme: light;
+  --paper: #f4f0e6;
+  --ink: #1a1814;
+  --muted: #3f3a33;
+  --line: #d8d0c3;
+  --accent: #0f4c3a;
+  --accent-ink: #f4f0e6;
+  --accent-hover: #0a3327;
+  --focus: #0f4c3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #161411;
+    --ink: #f3efe6;
+    --muted: #c8c0b4;
+    --line: #3a342c;
+    --accent: #8fcebb;
+    --accent-ink: #10241e;
+    --accent-hover: #c6efe2;
+    --focus: #c6efe2;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-lang="es"] [data-i18n="en"],
+html[data-lang="en"] [data-i18n="es"] {
+  display: none;
+}
+
+a,
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: max(0.75rem, env(safe-area-inset-left));
+  top: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip:focus-visible {
+  transform: none;
+  z-index: 4;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0.85rem max(1.25rem, env(safe-area-inset-right)) 0.85rem
+    max(1.25rem, env(safe-area-inset-left));
+}
+
+.brand {
+  color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--accent);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.15rem;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--ink);
+}
+
+.lang {
+  display: flex;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.lang button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.45rem;
+  cursor: pointer;
+}
+
+html[data-lang="es"] [data-set-lang="es"],
+html[data-lang="en"] [data-set-lang="en"] {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.lang button:hover {
+  color: var(--ink);
+}
+
+.hero,
+.block {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+}
+
+.hero {
+  padding-top: 4.5rem;
+  padding-bottom: 1rem;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  margin: 0.45rem 0 1rem;
+  font-size: clamp(3rem, 8vw, 5.4rem);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+#casos,
+#experiencia,
+#formacion,
+#contacto,
+#contenido {
+  scroll-margin-top: 4.75rem;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  scroll-margin-top: 5.5rem;
+}
+
+h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+  scroll-margin-top: 5.5rem;
+}
+
+.lead {
+  max-width: 38rem;
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.seeking {
+  max-width: 36rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1.75rem 0 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--accent-hover);
+  color: var(--accent-ink);
+}
+
+.text-link {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.block {
+  padding-top: 3.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.case {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem 1.5rem;
+  border-top: 1px solid var(--line);
+  padding: 2.25rem 0;
+}
+
+.idx {
+  margin: 0.15rem 0 0;
+  color: var(--accent);
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  margin: 1.15rem 0 0.2rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.case p,
+.role p {
+  max-width: 40rem;
+  margin: 0.35rem 0 0;
+  text-wrap: pretty;
+}
+
+.stack {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.role + .role {
+  margin-top: 2rem;
+}
+
+.role-line {
+  color: var(--muted);
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact li + li {
+  margin-top: 0.45rem;
+}
+
+.contact a {
+  overflow-wrap: anywhere;
+}
+
+#contacto {
+  padding-bottom: max(4rem, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 640px) {
+  .brand {
+    margin-right: auto;
+  }
+
+  nav {
+    flex-basis: 100%;
+    order: 3;
+  }
+
+  .lang {
+    order: 2;
+  }
+
+  .case {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .lang {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .site-header,
+  .hero-actions,
+  .skip {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-weight: 400;
+  }
+}

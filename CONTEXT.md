@@ -1,0 +1,25 @@
+# Portafolio
+
+Página pública con la que Arturo Mandujano busca trabajo de desarrollo. Existe para mostrar el trabajo web que se puede enseñar y el modo de contactarlo.
+
+## Language
+
+**Portafolio**:
+La página de contratación de Arturo.
+_Avoid_: currículum, galería de repositorios, sitio del concurso
+
+**Caso**:
+Un trabajo contado con el problema, la parte que le tocó, la decisión y el resultado.
+_Avoid_: proyecto, tarjeta, repositorio
+
+**Tienda**:
+El sitio público de PromoSelect.
+_Avoid_: storefront, e-commerce
+
+**Plataforma comercial**:
+El sistema con el que ventas arma la cotización, sigue el negocio y lo pasa a orden.
+_Avoid_: ERP, CRM
+
+**Coordinación**:
+Arturo sigue al frente de un equipo de 6 desarrolladores en PromoSelect. No es el puesto que la página ofrece.
+_Avoid_: gerencia, dirección
