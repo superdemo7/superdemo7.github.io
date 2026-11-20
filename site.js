@@ -90,6 +90,12 @@
     });
   });
 
+  document.querySelectorAll("[data-download-cv]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      window.print();
+    });
+  });
+
   apply(document.documentElement.dataset.lang === "en" ? "en" : "es");
 
   function rubberband(overshoot, dimension) {
