@@ -242,7 +242,10 @@ h3 {
   background: var(--accent);
   color: var(--accent-ink);
   text-decoration: none;
+  border: 0;
   border-radius: 980px;
+  font: inherit;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -588,10 +591,24 @@ h3 {
   margin-top: 1.8rem;
 }
 
+.role-points {
+  margin: 0.8rem 0 0;
+  padding-left: 1.15rem;
+  max-width: 40rem;
+}
+
+.role-points li + li {
+  margin-top: 0.45rem;
+}
+
 .contact {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.cv-download {
+  margin: 1.6rem 0 0;
 }
 
 .contact li + li {
@@ -681,7 +698,55 @@ h3 {
   .site-header,
   .hero-actions,
   .skip,
-  .film-track {
+  .film-track,
+  .chapter-art,
+  .flow,
+  .stage,
+  .cv-download {
     display: none;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .hero,
+  .block,
+  .chapter {
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 28pt;
+  }
+
+  h2 {
+    font-size: 16pt;
+  }
+
+  .chapter,
+  .project-card,
+  .role {
+    break-inside: avoid;
+  }
+
+  .project-shot img {
+    max-height: 22rem;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
