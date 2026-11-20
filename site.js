@@ -25,8 +25,8 @@
       en: "Screenshot of the InBike Studio site",
     },
     admin: {
-      es: "Captura de la pantalla de inicio de sesión del admin de PromoSelect",
-      en: "Screenshot of the PromoSelect admin sign-in screen",
+      es: "Captura del interior del admin de PromoSelect, con la lista de negocios",
+      en: "Screenshot of the PromoSelect admin, showing the deals list",
     },
   };
   var regions = {
@@ -52,9 +52,9 @@
     var ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "es_MX");
     var ogImageAlt = document.querySelector('meta[property="og:image:alt"]');
-    if (ogImageAlt) ogImageAlt.setAttribute("content", alts[lang]);
+    if (ogImageAlt) ogImageAlt.setAttribute("content", shotAlts.promoselect[lang]);
     var twitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
-    if (twitterImageAlt) twitterImageAlt.setAttribute("content", alts[lang]);
+    if (twitterImageAlt) twitterImageAlt.setAttribute("content", shotAlts.promoselect[lang]);
     var portrait = document.getElementById("portrait");
     if (portrait) portrait.alt = alts[lang];
     document.querySelectorAll("[data-shot]").forEach(function (img) {
