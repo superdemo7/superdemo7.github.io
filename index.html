@@ -189,31 +189,21 @@
         <div class="film-track" tabindex="0" role="region" aria-label="Trabajo">
           <article class="film-card">
             <a class="card-link" href="#tienda">
-              <svg class="glyph" viewBox="0 0 320 180" aria-hidden="true">
-                <rect x="24" y="28" width="272" height="28" rx="14" />
-                <circle cx="42" cy="42" r="5" />
-                <rect x="24" y="72" width="128" height="80" rx="12" />
-                <rect x="168" y="72" width="128" height="80" rx="12" />
-              </svg>
+              <img class="film-shot" src="screenshots/promoselect.jpg" alt="" loading="lazy">
               <p class="idx">01</p>
               <h3>
                 <span data-i18n="es">Tienda de <span translate="no">PromoSelect</span></span>
                 <span data-i18n="en"><span translate="no">PromoSelect</span> store</span>
               </h3>
               <p>
-                <span data-i18n="es">Buscador, listado y checkout, como parte del equipo.</span>
-                <span data-i18n="en">Search, listing, and checkout, as part of the team.</span>
+                <span data-i18n="es">Buscador, listado y checkout, bajo mi dirección técnica.</span>
+                <span data-i18n="en">Search, listing, and checkout, under my technical direction.</span>
               </p>
             </a>
           </article>
           <article class="film-card">
             <a class="card-link" href="#plataforma">
-              <svg class="glyph" viewBox="0 0 320 180" aria-hidden="true">
-                <line x1="56" y1="90" x2="264" y2="90" />
-                <circle cx="56" cy="90" r="18" />
-                <circle cx="160" cy="90" r="18" />
-                <circle cx="264" cy="90" r="18" />
-              </svg>
+              <img class="film-shot" src="screenshots/admin.jpg" alt="" loading="lazy">
               <p class="idx">02</p>
               <h3>
                 <span data-i18n="es">Plataforma comercial</span>
@@ -227,12 +217,7 @@
           </article>
           <article class="film-card">
             <a class="card-link" href="#inbike">
-              <svg class="glyph" viewBox="0 0 320 180" aria-hidden="true">
-                <circle cx="108" cy="96" r="36" />
-                <circle cx="108" cy="96" r="8" />
-                <rect x="176" y="48" width="112" height="88" rx="12" />
-                <path d="M196 84h72M196 104h72M196 124h40" />
-              </svg>
+              <img class="film-shot" src="screenshots/inbike.jpg" alt="" loading="lazy">
               <p class="idx">03</p>
               <h3 translate="no">InBike Studio</h3>
               <p>
@@ -268,8 +253,8 @@
             <span data-i18n="en">My part</span>
           </p>
           <p>
-            <span data-i18n="es">Participé en la tienda como parte del equipo.</span>
-            <span data-i18n="en">I worked on the store as part of the team.</span>
+            <span data-i18n="es">Lidero el equipo de 6 desarrolladores y dirigí la arquitectura y el desarrollo full stack de la tienda.</span>
+            <span data-i18n="en">I lead the team of 6 developers and directed the architecture and full-stack development of the store.</span>
           </p>
           <p class="label">
             <span data-i18n="es">Decisión</span>
@@ -283,6 +268,14 @@
               The visible work is search, the product listing, and checkout. Search is in the first HTML, so it is on the page when it arrives, not after JavaScript loads.
             </span>
           </p>
+          <p class="label">
+            <span data-i18n="es">Resultado</span>
+            <span data-i18n="en">Outcome</span>
+          </p>
+          <p>
+            <span data-i18n="es">El cliente encuentra el producto, lo personaliza y completa el pedido con pago en línea (Openpay), sin esperar a un ejecutivo.</span>
+            <span data-i18n="en">Visitors find the product, customize it, and complete the order with online payment (Openpay), without waiting for a salesperson.</span>
+          </p>
           <p class="stack" translate="no">Next.js · React · Algolia</p>
           <p>
             <a class="text-link" href="https://promoselect.com.mx/">
@@ -292,15 +285,7 @@
           </p>
         </div>
         <div class="chapter-art" aria-hidden="true">
-          <svg viewBox="0 0 420 520">
-            <rect class="panel" x="40" y="36" width="340" height="64" rx="18" />
-            <circle cx="72" cy="68" r="8" />
-            <rect x="96" y="60" width="180" height="16" rx="8" />
-            <rect class="panel" x="40" y="124" width="160" height="168" rx="18" />
-            <rect class="panel" x="220" y="124" width="160" height="168" rx="18" />
-            <rect class="panel" x="40" y="312" width="160" height="168" rx="18" />
-            <rect class="panel" x="220" y="312" width="160" height="168" rx="18" />
-          </svg>
+          <img src="screenshots/promoselect.jpg" alt="" loading="lazy">
         </div>
       </section>
 
@@ -339,6 +324,14 @@
             <span data-i18n="es">El flujo que mantengo es ese: cotización, negocio y paso a orden.</span>
             <span data-i18n="en">The flow I maintain is quote, deal, and conversion into an order.</span>
           </p>
+          <p class="label">
+            <span data-i18n="es">Resultado</span>
+            <span data-i18n="en">Outcome</span>
+          </p>
+          <p>
+            <span data-i18n="es">Ventas arma la cotización, sigue el negocio y lo convierte en orden dentro de la misma herramienta, con facturación electrónica (Alegra/SAT).</span>
+            <span data-i18n="en">Sales builds the quote, follows the deal, and turns it into an order inside the same tool, with e-invoicing (Alegra/SAT).</span>
+          </p>
           <p class="stack" translate="no">PHP · Symfony · Vue · Nuxt</p>
           <p>
             <a class="text-link" href="https://admin.promoselect.com.mx/">
@@ -347,11 +340,9 @@
             </a>
           </p>
         </div>
-        <ol class="flow" aria-hidden="true">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ol>
+        <div class="chapter-art" aria-hidden="true">
+          <img src="screenshots/admin.jpg" alt="" loading="lazy">
+        </div>
       </section>
 
       <section id="inbike" class="chapter">
@@ -390,6 +381,14 @@
               The public page shows the community, the calendar, and the memberships. A reservation is confirmed from the account.
             </span>
           </p>
+          <p class="label">
+            <span data-i18n="es">Resultado</span>
+            <span data-i18n="en">Outcome</span>
+          </p>
+          <p>
+            <span data-i18n="es">El visitante ve las clases y las membresías y reserva su bicicleta desde su cuenta.</span>
+            <span data-i18n="en">Visitors see the classes and memberships and reserve their bike from their account.</span>
+          </p>
           <p class="stack" translate="no">Next.js</p>
           <p>
             <a class="text-link" href="https://www.inbikestudio.com/">
@@ -399,12 +398,7 @@
           </p>
         </div>
         <div class="chapter-art" aria-hidden="true">
-          <svg viewBox="0 0 420 520">
-            <circle class="panel" cx="150" cy="230" r="92" />
-            <circle cx="150" cy="230" r="16" />
-            <rect class="panel" x="250" y="120" width="130" height="220" rx="18" />
-            <path d="M274 176h84M274 208h84M274 240h84M274 272h52" />
-          </svg>
+          <img src="screenshots/inbike.jpg" alt="" loading="lazy">
         </div>
       </section>
 
@@ -435,8 +429,8 @@
                     src="screenshots/suitup.jpg"
                     data-shot="suitup"
                     alt=""
-                    width="1200"
-                    height="675"
+                    width="1906"
+                    height="1015"
                     loading="lazy"
                     decoding="async"
                   />
@@ -516,8 +510,8 @@
                     src="screenshots/admin.jpg"
                     data-shot="admin"
                     alt=""
-                    width="818"
-                    height="916"
+                    width="1892"
+                    height="890"
                     loading="lazy"
                     decoding="async"
                   />
