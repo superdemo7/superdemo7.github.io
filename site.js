@@ -134,21 +134,7 @@
     var stopSpring = null;
     var suppressClick = false;
 
-    track.addEventListener("pointerdown", function (event) {
-      if (event.pointerType !== "mouse" || event.button !== 0) return;
-      if (stopSpring) stopSpring();
-      track.setPointerCapture(event.pointerId);
-      drag = {
-        x: event.clientX,
-        scroll: track.scrollLeft,
-        last: performance.now(),
-        v: 0,
-        moved: false,
-      };
-      track.classList.add("is-dragging");
-    });
-
-    track.addEventListener("pointermove", function (event) {
+    function onDragMove(event) {
       if (!drag) return;
       var dx = event.clientX - drag.x;
       if (Math.abs(dx) > 8) drag.moved = true;
@@ -161,7 +147,7 @@
       if (dt > 0) drag.v = (next - track.scrollLeft) / dt;
       drag.last = now;
       track.scrollLeft = next;
-    });
+    }
 
     function endDrag() {
       if (!drag) return;
@@ -169,6 +155,7 @@
       suppressClick = drag.moved;
       drag = null;
       track.classList.remove("is-dragging");
+      window.removeEventListener("pointermove", onDragMove);
       var max = Math.max(0, track.scrollWidth - track.clientWidth);
       var projected = track.scrollLeft + project(velocity);
       var cards = Array.prototype.slice.call(track.children);
@@ -185,8 +172,23 @@
       });
     }
 
-    track.addEventListener("pointerup", endDrag);
-    track.addEventListener("pointercancel", endDrag);
+    track.addEventListener("pointerdown", function (event) {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      if (stopSpring) stopSpring();
+      suppressClick = false;
+      drag = {
+        x: event.clientX,
+        scroll: track.scrollLeft,
+        last: performance.now(),
+        v: 0,
+        moved: false,
+      };
+      track.classList.add("is-dragging");
+      window.addEventListener("pointermove", onDragMove);
+      window.addEventListener("pointerup", endDrag, { once: true });
+      window.addEventListener("pointercancel", endDrag, { once: true });
+    });
+
     track.addEventListener(
       "click",
       function (event) {
@@ -250,6 +252,7 @@
       else {
         el.style.opacity = "";
         el.style.transform = "";
+        el.classList.remove("reveal");
       }
     }
     requestAnimationFrame(tick);
